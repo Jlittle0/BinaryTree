@@ -47,16 +47,48 @@ public class BST {
      * @return true if val is in the tree, false otherwise
      */
     public boolean search(int val) {
-        // TODO: Complete the search function
-        return false;
+        // Calls helper method
+        return binarySearch(val, root);
     }
+
+    public boolean binarySearch(int val, BSTNode root) {
+        /*
+        Finds whether the value is in the binaryTree by using recursion to iterate
+        through the entirety of the tree and traversing by moving left if the value is less than
+        the current node's value, right if it's greater, or returning true if it's equal. This
+        function returns false in the case that either the left or right node needed to find the
+        value doesn't exist and is null therefore showing that the value isn't in the tree.
+         */
+        if (root == null) {
+            return false;
+        }
+        if (val > root.getVal()) {
+            return binarySearch(val, root.getRight());
+        }
+        else if (val < root.getVal()) {
+            return binarySearch(val, root.getLeft());
+        }
+        return true;
+    }
+
 
     /**
      * @return ArrayList of BSTNodes in inorder
      */
     public ArrayList<BSTNode> getInorder() {
         // TODO: Complete inorder traversal
-        return null;
+        ArrayList<BSTNode> list = new ArrayList<BSTNode>();
+        inorder(root, list);
+        return list;
+    }
+
+    public void inorder(BSTNode n, ArrayList<BSTNode> list) {
+        if (n == null) {
+            return;
+        }
+        inorder(n.getLeft(), list);
+        list.add(n);
+        inorder(n.getRight(), list);
     }
 
     /**
@@ -64,7 +96,18 @@ public class BST {
      */
     public ArrayList<BSTNode> getPreorder() {
         // TODO: Complete preorder traversal
-        return null;
+        ArrayList<BSTNode> list = new ArrayList<BSTNode>();
+        preorder(root, list);
+        return list;
+    }
+
+    public void preorder(BSTNode n, ArrayList<BSTNode> list) {
+        if (n == null) {
+            return;
+        }
+        list.add(n);
+        preorder(n.getLeft(), list);
+        preorder(n.getRight(), list);
     }
 
     /**
@@ -72,7 +115,18 @@ public class BST {
      */
     public ArrayList<BSTNode> getPostorder() {
         // TODO: Complete postorder traversal
-        return null;
+        ArrayList<BSTNode> list = new ArrayList<BSTNode>();
+        postorder(root, list);
+        return list;
+    }
+
+    public void postorder(BSTNode n, ArrayList<BSTNode> list) {
+        if (n == null) {
+            return;
+        }
+        postorder(n.getLeft(), list);
+        postorder(n.getRight(), list);
+        list.add(n);
     }
 
     /**
