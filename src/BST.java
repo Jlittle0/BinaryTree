@@ -137,6 +137,31 @@ public class BST {
      */
     public void insert(int val) {
         // TODO: Complete insert
+        insertVal(val, root);
+    }
+
+    public void insertVal(int val, BSTNode n) {
+        if (n == null) {
+            // Somehow this happened but idk how
+            return;
+        }
+        if (val > n.getVal()) {
+            if (n.getRight() == null) {
+                n.setRight(new BSTNode(val));
+            }
+            else {
+                insertVal(val, n.getRight());
+            }
+        }
+        else if (val < n.getVal()) {
+            if (n.getLeft() == null) {
+                n.setLeft(new BSTNode(val));
+            }
+            else {
+                insertVal(val, n.getLeft());
+            }
+        }
+        return;
     }
 
     /**
