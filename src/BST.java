@@ -77,15 +77,25 @@ public class BST {
      */
     public ArrayList<BSTNode> getInorder() {
         // TODO: Complete inorder traversal
+        // Create a new arraylist to return
         ArrayList<BSTNode> list = new ArrayList<BSTNode>();
+        // Call the helper method for inorder and input the root node as well as the list
         inorder(root, list);
+        // Return the completed list
         return list;
     }
 
     public void inorder(BSTNode n, ArrayList<BSTNode> list) {
+        // If the node is null and there is no longer any more branches to go to, return;
         if (n == null) {
             return;
         }
+        /*
+        Traverse the binarytree and add each node to the list in the order of left, node, right
+        this happens by recursing each time on the left until you reach the leftmost node then
+        the "node" being added to the list in the middle is the leftmost and then continue by
+        adding the middle nodes above the leftmost and then working towards the rightmost
+         */
         inorder(n.getLeft(), list);
         list.add(n);
         inorder(n.getRight(), list);
@@ -96,6 +106,7 @@ public class BST {
      */
     public ArrayList<BSTNode> getPreorder() {
         // TODO: Complete preorder traversal
+        // Same thing as inorder
         ArrayList<BSTNode> list = new ArrayList<BSTNode>();
         preorder(root, list);
         return list;
@@ -105,6 +116,14 @@ public class BST {
         if (n == null) {
             return;
         }
+        /*
+        This preorder method does the exact same thing as inorder except the priority is
+        switched and I traverse the binarytree and add each node to the list in the order of
+        current node, the left, and finally right instead of left first, current second, right last.
+        This happens by adding the current node then recursing on the left node and repeating
+        until you reach the leftmost node then that's added and the right node is recursed on
+        and then this is continued until all the nodes are added
+         */
         list.add(n);
         preorder(n.getLeft(), list);
         preorder(n.getRight(), list);
@@ -115,6 +134,7 @@ public class BST {
      */
     public ArrayList<BSTNode> getPostorder() {
         // TODO: Complete postorder traversal
+        // same as preorder and inorder
         ArrayList<BSTNode> list = new ArrayList<BSTNode>();
         postorder(root, list);
         return list;
@@ -124,6 +144,10 @@ public class BST {
         if (n == null) {
             return;
         }
+           /*
+            This postorder is basically the same as the two that came before it except again, the
+            priority is switched so that the left is prioritized, then the right, before adding.
+         */
         postorder(n.getLeft(), list);
         postorder(n.getRight(), list);
         list.add(n);
