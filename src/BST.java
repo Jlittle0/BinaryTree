@@ -91,10 +91,13 @@ public class BST {
             return;
         }
         /*
-        Traverse the binarytree and add each node to the list in the order of left, node, right
-        this happens by recursing each time on the left until you reach the leftmost node then
-        the "node" being added to the list in the middle is the leftmost and then continue by
-        adding the middle nodes above the leftmost and then working towards the rightmost
+        Traverses the binary tree from least to greatest and adds these values by recursing
+        through the tree in the order of left child, current node, then right child so that when
+        you eventually get to the leftmost bottommost node, the lowest value, it prints itself
+        because it has no left child and then it would go up one level to the previous recursive
+        call and add that number to the list because it would be the 2nd smallest etc.
+        then continue by adding the middle nodes above the leftmost and then working
+        towards the rightmost node eventually reaching your largest value and adding it
          */
         inorder(n.getLeft(), list);
         list.add(n);
@@ -119,10 +122,13 @@ public class BST {
         /*
         This preorder method does the exact same thing as inorder except the priority is
         switched and I traverse the binarytree and add each node to the list in the order of
-        current node, the left, and finally right instead of left first, current second, right last.
-        This happens by adding the current node then recursing on the left node and repeating
-        until you reach the leftmost node then that's added and the right node is recursed on
-        and then this is continued until all the nodes are added
+        reaching it from current node, then left, and finally right instead of left first, current
+        second, and right last. This happens by adding the current node then recursing on the
+        left node (which is added next) and repeating until you reach the leftmost node then
+        that's added and the right node is recursed on for the previous nodes moving back up
+        the chain until the top is reached and then the right side of the tree is traveresed and
+        this is continued until all the nodes are added. Basically segments the tree into middle
+        node then going through the entirety of the left tree then the entirety of the right.
          */
         list.add(n);
         preorder(n.getLeft(), list);
@@ -146,7 +152,9 @@ public class BST {
         }
            /*
             This postorder is basically the same as the two that came before it except again, the
-            priority is switched so that the left is prioritized, then the right, before adding.
+            priority is switched so that the left is prioritized, then the right, before adding so
+            you get the leaves of the leftmode non-leaf node first then the parent node for the
+            leafs etc.
          */
         postorder(n.getLeft(), list);
         postorder(n.getRight(), list);
@@ -161,12 +169,13 @@ public class BST {
      */
     public void insert(int val) {
         // TODO: Complete insert
+        // Calls helper method to insert the value and provides the root as current node
         insertVal(val, root);
     }
 
     public void insertVal(int val, BSTNode n) {
         if (n == null) {
-            // Somehow this happened but idk how
+            // Ig this might somehow happen although idk how
             return;
         }
         if (val > n.getVal()) {
